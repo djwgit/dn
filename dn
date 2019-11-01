@@ -13,6 +13,12 @@ dnt() {
   cat ~/dn/$(date "+%Y-%m-%d")
 }
 
+# edit today's note with vim
+dnte() {
+  echo $(date "+%Y-%m-%d")
+  vim ~/dn/$(date "+%Y-%m-%d")
+}
+  
 dnview() {
   find ~/dn/$1* -type f -exec basename {} \; -exec cat {} \;
 }
