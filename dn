@@ -20,7 +20,7 @@ dnt() {
 }
 
 # edit today's note with vim
-dnet() {
+dnte() {
   vim ~/dn/$(date "+%Y-%m-%d")
 }
   
