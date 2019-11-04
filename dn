@@ -8,8 +8,6 @@ dno() {
   echo " * $2" >> ~/dn/$1
 }
 
-# edit note for a given date, e.g. dnoe 2019-11-02
-# if no date given, vim lists the ~/dn folder, then pick one to edit
 dnoe() {
   vim ~/dn/$1
 }
@@ -19,7 +17,6 @@ dnt() {
   cat ~/dn/$(date "+%Y-%m-%d")
 }
 
-# edit today's note with vim
 dnte() {
   vim ~/dn/$(date "+%Y-%m-%d")
 }
