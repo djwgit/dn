@@ -2,7 +2,7 @@
 # Daily Notes Aliases
 dn() {
   if [ "$(echo $@|xargs)" != "" ]; then
-    echo " * $@" >> ~/dn/$(date "+%Y-%m-%d")	
+    echo " * $@" >> ~/dn/notes/$(date "+%Y-%m-%d")	
   fi
 }
 
@@ -10,35 +10,35 @@ dn() {
 # or relative date:  dno -2 "a note save to 2 days ago"  dno +3 "a note for 3 days later"
 dno() {
   if [ "$1" = "yesterday" ]; then
-    echo " * ${@:2}" >> ~/dn/$(date -v-1d "+%Y-%m-%d")
+    echo " * ${@:2}" >> ~/dn/notes/$(date -v-1d "+%Y-%m-%d")
   elif [ "$1" = "tomorrow" ]; then
-    echo " * ${@:2}" >> ~/dn/$(date -v+1d "+%Y-%m-%d")
+    echo " * ${@:2}" >> ~/dn/notes/$(date -v+1d "+%Y-%m-%d")
   elif [[ $1 == -* ]] || [[ $1 == +* ]] ; then
     echo " * ${@:2}" >> ~/dn/notes/$(date -v${1}d "+%Y-%m-%d")    
   else
-    echo " * ${@:2}" >> ~/dn/$1
+    echo " * ${@:2}" >> ~/dn/notes/$1
   fi
 }
 
 dnoe() {
-  vim ~/dn/$1
+  vim ~/dn/notes/$1
 }
 
 dnt() {
   echo $(date "+%Y-%m-%d")
-  cat ~/dn/$(date "+%Y-%m-%d")
+  cat ~/dn/notes/$(date "+%Y-%m-%d")
 }
 
 dnte() {
   echo $(date "+%Y-%m-%d")
-  vim ~/dn/$(date "+%Y-%m-%d")
+  vim ~/dn/notes/$(date "+%Y-%m-%d")
 }
 
 dnv() {
-  find ~/dn/$1* -type f -exec basename {} \; -exec cat {} \;
+  find ~/dn/notes/$1* -type f -exec basename {} \; -exec cat {} \;
 }
 
 dni() {
   m=$(</dev/stdin)
-  echo " * $m" >>  ~/dn/$(date "+%Y-%m-%d")
+  echo " * $m" >>  ~/dn/notes/$(date "+%Y-%m-%d")
 }
