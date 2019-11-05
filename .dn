@@ -1,12 +1,13 @@
 
 # Daily Notes Aliases
 dn() {
-	if [ "$(echo $@|xargs)" != "" ]; then
-		echo " * $@" >> ~/dn/$(date "+%Y-%m-%d")	
+  if [ "$(echo $@|xargs)" != "" ]; then
+    echo " * $@" >> ~/dn/$(date "+%Y-%m-%d")	
   fi
 }
 
-
+# add note to a specified date, yesterday/tomorrow for convenience
+# could enhance this:  dno -2 "a note save to 2 days ago"  dno +3 "a note for 3 days later"
 dno() {
   if [ "$1" = "yesterday" ]; then
     echo " * ${@:2}" >> ~/dn/$(date -v-1d "+%Y-%m-%d")
