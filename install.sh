@@ -1,3 +1,5 @@
+mkdir -p ./notes
+
 echo "[ -f ~/dn/.dn ] && source ~/dn/.dn" >> ~/.bashrc
 echo "installed to ~/.bashrc"
 
