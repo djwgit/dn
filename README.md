@@ -8,7 +8,7 @@
 
 `dno` does the same, but the first argument is the filename.  This can be used for future notes 
 i.e. 
-- `dno 2030-10-01 "I died"`.
+- `dno 2030-10-01 "will be a sunny day"`.
 - `dno yesterday "add this note to yesterday"`
 - `dno tomorrow "a note for tomorrow"`
 
@@ -66,4 +66,5 @@ cd ~
 git clone https://github.com/djwgit/dn
 cd ~/dn
 sh install.sh
-```dn
+```
+open a new terminal, ready to use. or `source ~/dn/.dn` in current terminal to use.
