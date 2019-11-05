@@ -6,7 +6,11 @@
 
 `dn` writes a bullet-pointed string to a file with today's date in YYYY-MM-DD format in the `~/dn/` folder.
 
-`dno` does the same, but the first argument is the filename.  This can be used for future notes i.e. `dno 2030-10-01 "I died"`.
+`dno` does the same, but the first argument is the filename.  This can be used for future notes 
+i.e. 
+`dno 2030-10-01 "I died"`.
+dno yesterday "add this note to yesterday"
+dno tomorrow "a note for tomorrow"
 
 `dnt` displays today's notes.
 
@@ -56,10 +60,10 @@ $ dnview 2019-11
 If you want search, my recommendation is that you install a tool like `ripgrep`, which lists filenames and only echoes the relevant lines.
 
 # Setup
-
-`mkdir ~/dn`
-
-For bash: `cat dn >> ~/.bashrc`
-For zsh: `cat dn >> ~/.zshrc`
-
-Replace with the config file for your shell of choice!
+clone this repo to ~/dn, then run install.sh to enabled it for zsh and bash
+```
+cd ~
+git clone https://github.com/djwgit/dn
+cd ~/dn
+sh install.sh
+```dn
