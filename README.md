@@ -20,8 +20,11 @@ i.e.
 
 `dnte` edit today's notes in vim.
 
-`dnoe` edit a note in vim for a given date. i.e. `dnoe 2019-11-02`. If no date specified, vim lists the ~/dn folder, pick one to edit.
-
+`dnoe` edit a note in vim 
+- dnoe 2019-11-01
+- dnoe -2   # edit note of 2 days ago
+- dnoe +3   # edit note for 3 days later
+- dnoe      # vim lists all files to select
 
 # Example
 

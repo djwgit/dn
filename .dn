@@ -20,8 +20,17 @@ dno() {
   fi
 }
 
+# vim edit a note
+# dnoe 2019-11-01
+# dnoe -2   # edit note of 2 days ago
+# dnoe +3   # edit note for 3 days later
+# dnoe      # vim will list all files to select
 dnoe() {
-  vim ~/dn/notes/$1
+  if [[ $1 == -* ]] || [[ $1 == +* ]] ; then
+    vim ~/dn/notes/$(date -v${1}d "+%Y-%m-%d")    
+  else
+    vim ~/dn/notes/$1
+  fi
 }
 
 dnt() {
