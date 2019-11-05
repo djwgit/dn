@@ -14,7 +14,7 @@ dno() {
   elif [ "$1" = "tomorrow" ]; then
     echo " * ${@:2}" >> ~/dn/$(date -v+1d "+%Y-%m-%d")
   elif [[ $1 == -* ]] || [[ $1 == +* ]] ; then
-  	echo " * ${@:2}" >> ~/dn/notes/$(date -v${1}d "+%Y-%m-%d")    
+    echo " * ${@:2}" >> ~/dn/notes/$(date -v${1}d "+%Y-%m-%d")    
   else
     echo " * ${@:2}" >> ~/dn/$1
   fi
