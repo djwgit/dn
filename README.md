@@ -16,7 +16,7 @@ i.e.
 
 `dnt` displays today's notes.
 
-`dnview` displays all files, or when an argument like `2019-10` is passed, `~/dn/2019-10*`.
+`dnv` displays all files, or when an argument like `2019-10` is passed, `~/dn/2019-10*`.
 
 `dnte` edit today's notes in vim.
 
@@ -28,13 +28,13 @@ i.e.
 ```
 $ dn "The same thing we do every night"
 
-$ dnview
+$ dnv
 2019-11-01
  * Made dn
 2019-11-02
  * The same thing we do every night
 
-$ dnview 2019-11-02
+$ dnv 2019-11-02
 2019-11-02
  * The same thing we do every night
 
@@ -44,7 +44,7 @@ $ dnt
 
 $ dno 1977-10-28 "Saw star wars"
 
-$ dnview
+$ dnv
 1977-10-28
  * Saw star wars
 2019-11-01
@@ -52,7 +52,7 @@ $ dnview
 2019-11-02
  * The same thing we do every night
 
-$ dnview 2019-11
+$ dnv 2019-11
 2019-11-01
  * Made dn
 2019-11-02
