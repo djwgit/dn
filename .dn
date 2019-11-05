@@ -1,5 +1,7 @@
 
 # Daily Notes Aliases
+
+# enter a note for today
 dn() {
   if [ "$(echo $@|xargs)" != "" ]; then
     echo " * $@" >> ~/dn/notes/$(date "+%Y-%m-%d")	
@@ -20,24 +22,29 @@ dno() {
   fi
 }
 
+# edit for a given date, otherwise, vim provides a file list to select.
 dnoe() {
   vim ~/dn/notes/$1
 }
 
+# view today's note
 dnt() {
   echo $(date "+%Y-%m-%d")
   cat ~/dn/notes/$(date "+%Y-%m-%d")
 }
 
+# vim today's note
 dnte() {
   echo $(date "+%Y-%m-%d")
   vim ~/dn/notes/$(date "+%Y-%m-%d")
 }
 
+# view notes: view all if no argument, or dnv 2019-11 for the month, or for the date
 dnv() {
   find ~/dn/notes/$1* -type f -exec basename {} \; -exec cat {} \;
 }
 
+# multiple line note for today
 dni() {
   m=$(</dev/stdin)
   echo " * $m" >>  ~/dn/notes/$(date "+%Y-%m-%d")
