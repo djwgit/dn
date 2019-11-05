@@ -35,6 +35,7 @@ dnte() {
 }
 
 dnv() {
+  clear
   find ~/dn/notes/$1* -type f -exec basename {} \; -exec cat {} \;
 }
 
