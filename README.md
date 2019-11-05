@@ -11,6 +11,8 @@ i.e.
 - `dno 2030-10-01 "will be a sunny day"`.
 - `dno yesterday "add this note to yesterday"`
 - `dno tomorrow "a note for tomorrow"`
+- `dno +2 "a note for 2 days later"`
+- `dno -2 "a note for 2 days ago"`
 
 `dnt` displays today's notes.
 
