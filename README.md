@@ -72,4 +72,7 @@ git clone https://github.com/djwgit/dn
 cd ~/dn
 sh install.sh
 ```
-open a new terminal, ready to use. or `source ~/dn/.dn` in current terminal to use.
+open a new terminal, ready to use. or `source ~/.zshrc` in current terminal to use.
+
+# Auto-sync notes to OneDrive
+in .zshrc/.bashrc, set DN_PATH to a folder under your OneDrive folder for auto-sync
