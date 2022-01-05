@@ -1,16 +1,44 @@
 
+
 # Daily Notes Aliases
+todo() {
+  if [ "$(echo $@|xargs)" != "" ]; then
+    echo " * $@" >> $DN_PATH/todo.txt
+  elif [ $# -eq 2 && "$1" = "done" ]; then
+    echo "done $2"
+  fi
+}
+
+todov() {
+  clear
+  echo "TODO:"
+  cat -n $DN_PATH/todo.txt
+}
+
+todoe(){
+  vim $DN_PATH/todo.txt
+}
 
 # enter a note for today
 dn() {
-  if [ "$(echo $@|xargs)" != "" ]; then
+  if [[ "$1" == *"-help"* ]]; then
+    echo "\nHelp:   dn -help"
+    echo "Usage:  dn [note]                         - add a note for today"
+    echo "        dna [-n|+n|0|2019-11-01]          - add a note for a given day"
+    echo "        dne [-n|+n|0|2019-11-01]          - edit note for a given day"
+    echo "        dnv [-n|+n|0|2017-01-01|2017-01]  - view notes for a given day"
+    echo "        todo [note]                       - add a todo"
+    echo "        todov                             - view todos"
+    echo "        todoe                             - edit todos"
+
+  elif [ "$(echo $@|xargs)" != "" ]; then
     echo " * $@" >> $DN_PATH/$(date "+%Y-%m-%d").txt
   fi
 }
 
 # add note to a specified date, yesterday/tomorrow for convenience
 # or relative date:  dno -2 "a note save to 2 days ago"  dno +3 "a note for 3 days later"
-dno() {
+dna() {
   if [ "$1" = "yesterday" ]; then
     echo " * ${@:2}" >> $DN_PATH/$(date -v-1d "+%Y-%m-%d").txt
   elif [ "$1" = "tomorrow" ]; then
@@ -23,13 +51,16 @@ dno() {
 }
 
 # vim edit a note
-# dnoe 2019-11-01
-# dnoe -2   # edit note of 2 days ago
-# dnoe +3   # edit note for 3 days later
-# dnoe      # vim will list all files to select
-dnoe() {
+# dne 2019-11-01
+# dne -2   # edit note of 2 days ago
+# dne +3   # edit note for 3 days later
+# dne 0    # edit note for today
+# dne      # vim will list all files to select
+dne() {
   if [[ $1 == -* ]] || [[ $1 == +* ]] ; then
     vim $DN_PATH/$(date -v${1}d "+%Y-%m-%d").txt
+  elif [[ $1 == 0 ]]; then
+    vim $DN_PATH/$(date "+%Y-%m-%d").txt
 	elif [ "$(echo $@|xargs)" = "" ]; then
     vim $DN_PATH/ 
   else
@@ -38,25 +69,38 @@ dnoe() {
 }
 
 # view today's note
-dnt() {
-  echo $(date "+%Y-%m-%d")
-  cat $DN_PATH/$(date "+%Y-%m-%d").txt
-}
+#dnt() {
+#  echo $(date "+%Y-%m-%d")
+#  cat $DN_PATH/$(date "+%Y-%m-%d").txt
+#}
 
 # vim today's note
-dnte() {
-  echo $(date "+%Y-%m-%d")
-  vim $DN_PATH/$(date "+%Y-%m-%d").txt
-}
+#dne() {
+#  echo $(date "+%Y-%m-%d")
+#  vim $DN_PATH/$(date "+%Y-%m-%d").txt
+#}
 
-# view notes: view all if no argument, or dnv 2019-11 for the month, or for the date
+# view notes: 
+# view all if no argument, 
+# dnv 2019-11 for the month, or for the date
+# dnv +2/-3 view notes for the given day
 dnv() {
-  clear
-  find $DN_PATH/$1* -type f -exec basename {} \; -exec cat {} \;
+  #clear
+  if [[ $1 == -* ]] || [[ $1 == +* ]] ; then
+    cat $DN_PATH/$(date -v${1}d "+%Y-%m-%d").txt
+  elif [[ $1 == 0 ]]; then
+    cat $DN_PATH/$(date "+%Y-%m-%d").txt
+
+	#if [ $# -eq 1 && "$1" = "month" ]; then
+	#  yyyymm=$(date "+%Y-%m")
+  # 	find $DN_PATH/$yyyymm* -type f -exec basename {} \; -exec cat {} \;
+	else
+    find $DN_PATH/$1* -type f -exec basename {} \; -exec cat {} \;
+	fi
 }
 
 # multiple line note for today
-dni() {
+dnm() {
   m=$(</dev/stdin)
   echo " * $m" >>  $DN_PATH/$(date "+%Y-%m-%d").txt
 }
