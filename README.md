@@ -5,13 +5,21 @@
 # Usage
 ```
 Help:   dn -help
-Usage:  dn [note]                         - add a note for today
-        dna [-n|+n|0|2019-11-01]          - add a note for a given day
-        dne [-n|+n|0|2019-11-01]          - edit note for a given day
-        dnv [-n|+n|0|2017-01-01|2017-01]  - view notes for a given day
-        todo [note]                       - add a note to todo.txt
-        todov                             - view todo.txt
-        todoe                             - edit todo.txt
+Usage:  dn [note]                                   - add a task for today
+        dnm                                         - add a multi-line daily task
+        dna [-n|+n|0|2019-11-01]                    - add a task for a given day
+        dne [-n|+n|0|2019-11-01]                    - edit task for a given day
+        dnv [-n|+n|0|m|m -1|2017-01-01|2017-01|all] - view tasks for a given day
+        
+        note [note]                                   - add a task for today
+        notem                                         - add a multi-line daily task
+        notea [-n|+n|0|2019-11-01]                    - add a task for a given day
+        notee [-n|+n|0|2019-11-01]                    - edit task for a given day
+        notev [-n|+n|0|m|m -1|2017-01-01|2017-01|all] - view tasks for a given day        
+        
+        todo [note]                          - add a task to todo.txt
+        todov                                - view todo.txt
+        todoe                                - edit todo.txt
 ```
 
 If you want search, my recommendation is that you install a tool like `ripgrep`, which lists filenames and only echoes the relevant lines.
