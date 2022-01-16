@@ -8,12 +8,14 @@
     dnm                                      - add a multi-line daily task
     dna [-n|2019-11-01]                      - add a task for a given day
     dne [ |-n|2019-11-01]                    - edit task for a given day
+    dne vscode                               - edit today's task with vscode
     dnv [ |-n|m|m -1|2017-01-01|2017-01|all] - view tasks for a given day
         
     note [note]                                - add a task for today
     notem                                      - add a multi-line daily task
     notea [-n|2019-11-01]                      - add a task for a given day
     notee [ |-n|2019-11-01]                    - edit task for a given day
+    notee vscode                               - edit today's note with vscode
     notev [ |-n|m|m -1|2017-01-01|2017-01|all] - view tasks for a given day        
         
     todo [todo]     - add a todo
