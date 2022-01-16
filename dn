@@ -5,10 +5,10 @@ todo() {
     echo "\nHelp:   todo -help"
     echo "        todo [todo]           - add a todo"
     echo "        todo [n] done		- mark a todo done"
-    echo "	  todo [n] redo		- redo a todo"
-    echo " 	  todo [n] del		- del a todo"
+    echo "        todo [n] redo		- redo a todo"
+    echo "        todo [n] del		- del a todo"
     echo "        todov                 - view todos"
-    echo "        todoe                 - edit todos"
+    echo "        todoe                 - vim edit todos"
 
   elif [[ $# -eq 2 ]] && [[ "$2" = "done" ]]; then
     done_item=`head -n $1 $DN_PATH/todo.txt | tail -1`
