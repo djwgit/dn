@@ -69,7 +69,7 @@ dn() {
     echo "        dna [-n|2019-11-01]                   - add a task for a given day"
     echo "        dne [ |-n|2019-11-01|all]             - edit task for a given day"
     echo "        dnv [ |-n|2017-01-01|2017-01|all]     - view tasks for a given day"    
-
+    echo "        nds [query]                           - search in all daily tasks"    
   elif [ "$(echo $@|xargs)" != "" ]; then
     echo " * $@" >> $DN_PATH/tasks/$(date "+%Y")/$(date "+%Y-%m-%d").txt
   fi
@@ -137,6 +137,14 @@ dnv() {
   fi
 }
 
+dns()
+{
+  if [[ "$1" == "" ]]; then
+    echo "dns q"
+  else
+    grep -rnw --color=always "$@" ${DN_PATH}/tasks | sed "s#$DN_PATH##g"
+  fi
+}
 
 ########################### notes ###############
 
@@ -149,6 +157,7 @@ note() {
     echo "        notea [-n|2019-11-01]            - add a note for a given day"
     echo "        notee [ |-n|2019-11-01|]         - edit note for a given day"
     echo "        notev [ |-n|2017-01-01|2017-01]  - view notes for a given day"
+    echo "        notes [query]                    - search in all notes"    
   elif [ "$(echo $@|xargs)" != "" ]; then
     echo " * $@" >> $DN_PATH/notes/$(date "+%Y")/$(date "+%Y-%m-%d").txt
   fi
@@ -185,6 +194,14 @@ notee() {
   fi
 }
 
+notes()
+{
+  if [[ "$1" == "" ]]; then
+    echo "notes q"
+  else
+    grep -rnw --color=always "$@" ${DN_PATH}/notes | sed "s#$DN_PATH##g"
+  fi
+}
 
 notev() {
   #clear
