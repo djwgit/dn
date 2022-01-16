@@ -7,7 +7,7 @@ todo() {
     echo "        todov                                 - view todos"
     echo "        todoe                                 - edit todos"
 
-  if [ "$(echo $@|xargs)" != "" ]; then
+  elif [ "$(echo $@|xargs)" != "" ]; then
     echo " * $@" >> $DN_PATH/todo.txt
   elif [ $# -eq 2 && "$1" = "done" ]; then
     echo "done $2"
