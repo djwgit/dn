@@ -10,6 +10,7 @@
     dne [ |-n|2019-11-01]                    - edit task for a given day
     dne vscode                               - edit today's task with vscode
     dnv [ |-n|m|m -1|2017-01-01|2017-01|all] - view tasks for a given day
+    dns [query]                              - search in all daily tasks
         
     note [note]                                - add a task for today
     notem                                      - add a multi-line daily task
@@ -17,7 +18,8 @@
     notee [ |-n|2019-11-01]                    - edit task for a given day
     notee vscode                               - edit today's note with vscode
     notev [ |-n|m|m -1|2017-01-01|2017-01|all] - view tasks for a given day        
-        
+    notes [query]                              - search in all notes
+    
     todo [todo]     - add a todo
     todo [n] done   - mark a todo done
     todo [n] redo   - redo a todo
