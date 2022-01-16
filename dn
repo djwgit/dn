@@ -103,6 +103,8 @@ dne() {
     vim $DN_PATH/tasks/$(date -v${1}d "+%Y")/$(date -v${1}d "+%Y-%m-%d").txt
   elif [[ "$1" == "" ]]; then    		 # edit today
     vim $DN_PATH/tasks/$(date "+%Y")/$(date "+%Y-%m-%d").txt
+  elif [ "$(echo $@|xargs)" = "vscode" ]; then    # edit today's dn with vscode
+    code $DN_PATH/tasks/$(date "+%Y")/$(date "+%Y-%m-%d").txt    
 	elif [ "$1" = "all" ]; then               # pick one to edit
     vim $DN_PATH/tasks
   else                                            # edit specified date
@@ -176,6 +178,8 @@ notee() {
     vim $DN_PATH/notes/$(date "+%Y")/$(date "+%Y-%m-%d").txt
   elif [ "$1" = "all" ]; then                    # pick one to edit
     vim $DN_PATH/notes
+  elif [ "$(echo $@|xargs)" = "vscode" ]; then    # edit with vscode
+    code $DN_PATH/notes/$(date "+%Y")/$(date "+%Y-%m-%d").txt
   else                                           # edit specified date
     vim $DN_PATH/notes/${1:0:4}/$1.txt
   fi
