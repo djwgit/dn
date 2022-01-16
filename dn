@@ -7,21 +7,52 @@ todo() {
     echo "        todov                                 - view todos"
     echo "        todoe                                 - edit todos"
 
-  elif [ "$(echo $@|xargs)" != "" ]; then
-    echo " * $@" >> $DN_PATH/todo.txt
-  elif [ $# -eq 2 && "$1" = "done" ]; then
-    echo "done $2"
+  elif [[ $# -eq 2 ]] && [[ "$2" = "done" ]]; then
+    done_item=`head -n $1 $DN_PATH/todo.txt | tail -1`
+    cp $DN_PATH/todo.txt $DN_PATH/todo.txt.ori
+    sed ${1}d $DN_PATH/todo.txt.ori > $DN_PATH/todo.txt
+    echo "$done_item [$(date '+%Y-%m-%d')]" >> $DN_PATH/todo.txt
+    todov
+  elif [[ $# -eq 2 ]] && [[ "$2" = "del" ]]; then
+    del_item=`head -n $1 $DN_PATH/todo.txt | tail -1`
+    cp $DN_PATH/todo.txt $DN_PATH/todo.txt.ori
+    sed ${1}d $DN_PATH/todo.txt.ori > $DN_PATH/todo.txt
+    todov  
+  elif [[ $# -eq 2 ]] && [[ "$2" = "redo" ]]; then
+    redo_item=`head -n $1 $DN_PATH/todo.txt | tail -1`
+    cp $DN_PATH/todo.txt $DN_PATH/todo.txt.ori
+    sed ${1}d $DN_PATH/todo.txt.ori > $DN_PATH/todo.txt
+    echo $redo_item | cat - $DN_PATH/todo.txt | tee $DN_PATH/todo.txt.tmp &>nul
+    cp $DN_PATH/todo.txt.tmp $DN_PATH/todo.txt
+    todov
+  else  
+    echo "* [$(date '+%Y-%m-%d')] $@" | cat - $DN_PATH/todo.txt | tee $DN_PATH/todo.txt.tmp &>nul
+    cp $DN_PATH/todo.txt.tmp $DN_PATH/todo.txt
+    todov
   fi
 }
 
 todov() {
   clear
-  echo "TODO:"
+  echo "     0  ### TODO ###"
   cat -n $DN_PATH/todo.txt
 }
 
 todoe(){
   vim $DN_PATH/todo.txt
+}
+
+
+# echo ${line:0:1}
+
+todod(){
+  while IFS= read -r line; do
+    printf "$line \n"
+    # if [[ ${line:0:1} == "*" ]]; then
+    #   printf 'x %s\n' "$line"
+    # else
+    #   printf $line
+  done < $DN_PATH/todo.txt
 }
 
 ################################ dn: daily task ##########
