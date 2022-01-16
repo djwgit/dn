@@ -1,7 +1,7 @@
 
 # Daily Notes Aliases
 todo() {
-  if [[ "$1" == *"-help"* ]]; then
+  if [[ "$1" == *"-help"* ]] || [[ "$1" == "" ]]; then
     echo "\nHelp:   todo -help"
     echo "        todo [todo]        - add a todo"
     echo "        todo [n] done      - mark a todo done"
@@ -62,7 +62,7 @@ todod(){
 
 # enter a note for today
 dn() {
-  if [[ "$1" == *"-help"* ]]; then
+  if [[ "$1" == *"-help"* ]] || [[ "$1" == "" ]]; then
     echo "\nHelp:   dn -help"
     echo "Usage:  dn [task]                             - add a task for today"
     echo "        dnm [task]                            - add a multi-line task for today"    
@@ -142,7 +142,7 @@ dnv() {
 
 # enter a note for today
 note() {
-  if [[ "$1" == *"-help"* ]]; then
+  if [[ "$1" == *"-help"* ]] || [[ "$1" == "" ]]; then
     echo "\nHelp:   note -help"
     echo "Usage:  note [note]                      - add a note for today"
     echo "        notem [note]                     - add a multi-line note for today"    
