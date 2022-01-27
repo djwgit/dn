@@ -1,7 +1,8 @@
-# command line tool for managing daily notes, daily tasks, and todos 
+## command line tool for daily notes, daily tasks, and todos 
 
 
-# Usage
+### Usage
+
 ```
 manage daily tasks:
     dt/task [task]                                 - add a task for today
@@ -30,7 +31,7 @@ manage todo items
     todoe           - vim edit todos
 ```
 
-# Setup
+### Setup
 clone this repo to ~/dn, then run install.sh to enabled it for zsh and bash
 ```
 cd ~
@@ -40,5 +41,5 @@ sh install.sh
 ```
 open a new terminal, ready to use. or `source ~/.zshrc` in current terminal to use.
 
-# Auto-sync notes to OneDrive
+### Auto-sync notes to OneDrive
 in .zshrc/.bashrc, set DN_PATH to a folder under your OneDrive folder for auto-sync
