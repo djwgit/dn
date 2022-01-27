@@ -1,6 +1,5 @@
-# dn - Daily note/task/todo command line tool
+# command line tool for managing daily notes, daily tasks, and todos 
 
-`dn` is a simple command line tool to help keep notes on what you did every day and what's coming up.
 
 # Usage
 ```
@@ -8,7 +7,7 @@ manage daily tasks:
     dt/task [task]                                 - add a task for today
     dtm/taskm                                      - add a multi-line daily task
     dta/taska [-n|2019-11-01]                      - add a task for a given day
-    dte/taske [ |-n|2019-11-01]                    - edit task for a given day
+    dte/taske [ |-n|2019-11-01|year|all]           - edit task for a given day
     dte/taske vscode                               - edit today's task with vscode
     dtv/taskv [ |-n|m|m -1|2017-01-01|2017-01|all] - view tasks for a given day
     ts/tasks [query]                               - search in all daily tasks
