@@ -8,33 +8,33 @@ alias notea="dna"
 alias notev="dnv"
 alias notee="dne"
 alias notes="dns"
-# enter a note for today
+
 dn() {
   if [[ "$1" == *"-help"* ]] || [[ "$1" == "" ]]; then
-    echo "\nHelp:   dn/note -help"
+    echo "Help:   dn/note -help"
     echo "Usage:  dn/note   [note]                     - add a note for today"
     echo "        dnm/notem [note]                     - add a multi-line note for today"    
     echo "        dna/notea [-n|2019-11-01]            - add a note for a given day"
     echo "        dne/notee [ |-n|2019-11-01|]         - edit note for a given day"
     echo "        dnv/notev [ |-n|2017-01-01|2017-01]  - view notes for a given day"
     echo "        dns/notes [query]                    - search in all notes"    
-  elif [ "$(echo $@|xargs)" != "" ]; then
-    echo " * $@" >> $DN_PATH/notes/$(date "+%Y")/$(date "+%Y-%m-%d").txt
+  elif [ "$(echo $@|xargs)" != "" ]; then		# enter a note for today
+    echo "* $@" >> $DN_PATH/notes/$(date "+%Y")/$(date "+%Y-%m-%d").txt
   fi
 }
 
 # multiple line note for today
 dnm() {
   m=$(</dev/stdin)
-  echo " * $m" >>  $DN_PATH/notes/$(date "+%Y")/$(date "+%Y-%m-%d").txt
+  echo "* $m" >>  $DN_PATH/notes/$(date "+%Y")/$(date "+%Y-%m-%d").txt
 }
 
 # append daily note
 dna() {
   if [[ $1 == -* ]]; then    # add to -d day
-    echo " * ${@:2}" >> $DN_PATH/notes/$(date -v${1}d "+%Y")/$(date -v${1}d "+%Y-%m-%d").txt    
+    echo "* ${@:2}" >> $DN_PATH/notes/$(date -v${1}d "+%Y")/$(date -v${1}d "+%Y-%m-%d").txt    
   else                       # add to specified date
-    echo " * ${@:2}" >> $DN_PATH/notes/${1:0:4}/$1.txt
+    echo "* ${@:2}" >> $DN_PATH/notes/${1:0:4}/$1.txt
   fi
 }
 
@@ -44,9 +44,9 @@ dne() {
     vim $DN_PATH/notes/$(date -v${1}d "+%Y")/$(date -v${1}d "+%Y-%m-%d").txt
   elif [[ "$1" == "" ]]; then   		 # edit today
     vim $DN_PATH/notes/$(date "+%Y")/$(date "+%Y-%m-%d").txt
-  elif [ "$1" = "all" ]; then                    # pick one to edit
+  elif [[ "$1" == "all" ]]; then                    # pick one to edit
     vim $DN_PATH/notes
-  elif [ "$(echo $@|xargs)" = "vscode" ]; then    # edit with vscode
+  elif [[ "$(echo $@|xargs)" == "vscode" ]]; then    # edit with vscode
     code $DN_PATH/notes/$(date "+%Y")/$(date "+%Y-%m-%d").txt
   else                                           # edit specified date
     vim $DN_PATH/notes/${1:0:4}/$1.txt
@@ -71,11 +71,11 @@ dnv() {
       yyyymm=$(date -v${2}m "+%Y-%m")
       yyyy=$(date -v${2}m "+%Y")
     fi
-    find $DN_PATH/notes/$yyyy/$yyyymm* -type f -exec basename {} \; -exec cat {} \;
+    find $DN_PATH/notes/$yyyy/$yyyymm* -type f -exec basename {} \; -exec cat {} \; -exec echo "" \; 
 	elif [[ "$1" == "all" ]]; then            # view all
-    find $DN_PATH/notes/* -type f -exec basename {} \; -exec cat {} \;
+    find $DN_PATH/notes/* -type f -exec basename {} \; -exec cat {} \; -exec echo "" \; 
   else                                      # view 2022-01, whatever matches
-    find $DN_PATH/notes/${1:0:4}/$1* -type f -exec basename {} \; -exec cat {} \;
+    find $DN_PATH/notes/${1:0:4}/$1* -type f -exec basename {} \; -exec cat {} \; -exec echo "" \; 
 	fi
 }
 
@@ -97,34 +97,34 @@ alias taska="dta"
 alias taskv="dtv"
 alias taske="dte"
 alias tasks="dts"
-# enter a note for today
+
 dt() {
   if [[ "$1" == *"-help"* ]] || [[ "$1" == "" ]]; then
-    echo "\nHelp:   dt/task -help"
+    echo "Help:   dt/task -help"
     echo "Usage:  dt/task   [task]                            - add a daily task"
     echo "        dtm/taskm [task]                            - add a multi-line daily task"    
     echo "        dta/taska [-n|2019-11-01]                   - add a task for a given day"
-    echo "        dte/taske [ |-n|2019-11-01|all]             - edit a task for a given day"
+    echo "        dte/taske [ |-n|2019-11-01|all|year]        - edit a task for a given day"
     echo "        dtv/taskv [ |-n|2017-01-01|2017-01|all]     - view tasks for a given day"    
     echo "        dts/tasks [query]                           - search in all daily tasks"    
-  elif [ "$(echo $@|xargs)" != "" ]; then
-    echo " * $@" >> $DN_PATH/tasks/$(date "+%Y")/$(date "+%Y-%m-%d").txt
+  elif [[ "$(echo $@|xargs)" != "" ]]; then			# enter a note for today
+    echo "* $@" >> $DN_PATH/tasks/$(date "+%Y")/$(date "+%Y-%m-%d").txt
   fi
 }
 
 # multiple line daily task for today
 dtm() {
   m=$(</dev/stdin)
-  echo " * $m" >>  $DN_PATH/tasks/$(date "+%Y")/$(date "+%Y-%m-%d").txt
+  echo "* $m" >>  $DN_PATH/tasks/$(date "+%Y")/$(date "+%Y-%m-%d").txt
 }
 
 # add a daily task to a specified date, yesterday/tomorrow for convenience
 # or relative date:  dno -2 "a note save to 2 days ago"  dno +3 "a note for 3 days later"
 dta() {
   if [[ $1 == -* ]]; then      # add to -d day
-    echo " * ${@:2}" >> $DN_PATH/tasks/$(date -v${1}d "+%Y")/$(date -v${1}d "+%Y-%m-%d").txt
+    echo "* ${@:2}" >> $DN_PATH/tasks/$(date -v${1}d "+%Y")/$(date -v${1}d "+%Y-%m-%d").txt
   else                         # add to specified date
-    echo " * ${@:2}" >> $DN_PATH/tasks/${1:0:4}/$1.txt
+    echo "* ${@:2}" >> $DN_PATH/tasks/${1:0:4}/$1.txt
   fi
 }
 
@@ -133,15 +133,17 @@ dta() {
 # dte -2   # edit note of 2 days ago
 # dte all  # vim will list all files to select
 dte() {
-  if [[ $1 == -* ]]; then                         # edit -d day
+  if [[ $1 == -* ]]; then                     # edit -d day
     vim $DN_PATH/tasks/$(date -v${1}d "+%Y")/$(date -v${1}d "+%Y-%m-%d").txt
-  elif [[ "$1" == "" ]]; then    		 # edit today
+  elif [[ "$1" == "" ]]; then    		          # edit today
     vim $DN_PATH/tasks/$(date "+%Y")/$(date "+%Y-%m-%d").txt
-  elif [ "$(echo $@|xargs)" = "vscode" ]; then    # edit today's dn with vscode
+  elif [[ "$(echo $@|xargs)" == "vscode" ]]; then    # edit today's dn with vscode
     code $DN_PATH/tasks/$(date "+%Y")/$(date "+%Y-%m-%d").txt    
-	elif [ "$1" = "all" ]; then               # pick one to edit
+	elif [[ "$1" == "year" ]]; then               # pick year to edit
+    vim $DN_PATH/tasks/$(date "+%Y")
+  elif [[ "$1" == "all" ]]; then                # pick one to edit
     vim $DN_PATH/tasks
-  else                                            # edit specified date
+  else                                        # edit specified date
     vim $DN_PATH/tasks/${1:0:4}/$1.txt
   fi
 }
@@ -152,15 +154,16 @@ dte() {
 # dtv 2019-11 for the month, or for the date
 # tv +2/-3 view notes for the given day
 dtv() {
+  viewer="cat"    # glow
   #clear
   if [[ "$1" == "" ]]; then                 # view today
     echo $(date "+%Y-%m-%d").txt
     if [ -f $DN_PATH/tasks/$(date "+%Y")/$(date "+%Y-%m-%d").txt ]; then
-      cat $DN_PATH/tasks/$(date "+%Y")/$(date "+%Y-%m-%d").txt
+      $viewer $DN_PATH/tasks/$(date "+%Y")/$(date "+%Y-%m-%d").txt
     fi    
   elif [[ $1 == -* ]]; then  # view -d day
     echo $(date "+%Y-%m-%d").txt  
-    cat $DN_PATH/tasks/$(date -v${1}d "+%Y")/$(date -v${1}d "+%Y-%m-%d").txt
+    $viewer $DN_PATH/tasks/$(date -v${1}d "+%Y")/$(date -v${1}d "+%Y-%m-%d").txt
   elif [[ "$1" == "m" ]]; then              # dnv m, dnv m -1
     yyyymm=$(date "+%Y-%m")
     yyyy=$(date "+%Y")
@@ -168,11 +171,11 @@ dtv() {
       yyyymm=$(date -v${2}m "+%Y-%m")
       yyyy=$(date -v${2}m "+%Y")
     fi
-    find $DN_PATH/tasks/$yyyy/$yyyymm* -type f -exec basename {} \; -exec cat {} \;
+    find $DN_PATH/tasks/$yyyy/$yyyymm* -type f -exec basename {} \; -exec $viewer {} \; #-exec echo "" \; 
 	elif [[ "$1" == "all" ]]; then            # view all
-    find $DN_PATH/tasks/* -type f -exec basename {} \; -exec cat {} \;
+    find $DN_PATH/tasks/* -type f -exec basename {} \; -exec $viewer {} \; -exec echo "" \; 
   else                                      # view 2022-01, whatever matches
-    find $DN_PATH/tasks/${1:0:4}/$1* -type f -exec basename {} \; -exec cat {} \;
+    find $DN_PATH/tasks/${1:0:4}/$1* -type f -exec basename {} \; -exec $viewer {} \; -exec echo "" \; 
   fi
 }
 
