@@ -21,7 +21,7 @@ manage daily notes:
     dna/notea [-?d|2019-11-01]           - add a task for a given day
     dne/notee <vscode> [ |-?d|-?m|-?y|month|year|all|2019-11-01|2021-11|2021]
                                          - edit task for a given day (with vscode)
-    dnv/notev [ |-?d|-?m|month|year|all|2017-01-01|2017-01]2021]
+    dnv/notev <glow> [ |-?d|-?m|month|year|all|2017-01-01|2017-01]2021]
                                          - view tasks for a given day        
     dns/notes [query]                    - search in all notes
     
