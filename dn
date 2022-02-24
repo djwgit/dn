@@ -4,25 +4,39 @@
 
 ################# functions ############
 # view note/task different ways
+# glow https://github.com/charmbracelet/glow
 _view(){
   clear
+  folder=$1; opt=$2; viewer=cat
+  if [[ $2 == *'glow' ]]; then  
+    opt=$3; viewer=glow
+  fi  
+
   if [[ "$2" == "" ]]; then              # notev: view today
     date "+%Y-%m-%d"
-    cat $DN_PATH/$1/$(date "+%Y")/$(date "+%m")/$(date "+%Y-%m-%d").txt
+    $viewer $DN_PATH/$1/$(date "+%Y")/$(date "+%m")/$(date "+%Y-%m-%d").txt
   elif [[ $2 == -*d ]]; then             # notev -1d 
     echo $(date -v${2} "+%Y-%m-%d")
-    cat $DN_PATH/$1/$(date -v${2} "+%Y")/$(date -v${2} "+%m")/$(date -v${2} "+%Y-%m-%d").txt
+    $viewer $DN_PATH/$1/$(date -v${2} "+%Y")/$(date -v${2} "+%m")/$(date -v${2} "+%Y-%m-%d").txt
   elif [[ $2 == -*m ]]; then             # notev -1m
     echo $(date -v${2} "+%Y")/$(date -v${2} "+%m")
-    find $DN_PATH/$1/$(date -v${2} "+%Y")/$(date -v${2} "+%m")/ -type f -exec basename {} \; -exec cat {} \; -exec echo "" \; 
+    find $DN_PATH/$1/$(date -v${2} "+%Y")/$(date -v${2} "+%m")/ -type f -exec basename {} \; -exec $viewer {} \; -exec echo "" \; 
   elif [[ $2 == "month" ]]; then         # notev month
-    find $DN_PATH/$1/$(date "+%Y")/$(date "+%m")/ -type f -exec basename {} \; -exec cat {} \; -exec echo "" \; 
+    find $DN_PATH/$1/$(date "+%Y")/$(date "+%m")/ -type f -exec basename {} \; -exec $viewer {} \; -exec echo "" \; 
 	elif [[ "$2" == "year" ]]; then        # notev year
-    find $DN_PATH/$1/$(date "+%Y")/* -type f -exec basename {} \; -exec cat {} \; -exec echo "" \; 
+    find $DN_PATH/$1/$(date "+%Y")/* -type f -exec basename {} \; -exec $viewer {} \; -exec echo "" \; 
 	elif [[ "$2" == "all" ]]; then         # notev all
-    find $DN_PATH/$1/* -type f -exec basename {} \; -exec cat {} \; -exec echo "" \; 
+    find $DN_PATH/$1/* -type f -exec basename {} \; -exec $viewer {} \; -exec echo "" \; 
   else                                   # notev 2022-01, notev 2022, notev 2022-02-1 whatever matches
-    find $DN_PATH/$1/${2:0:4}/ -type f -exec basename {} \; -exec cat {} \; -exec echo "" \; 
+    len=${#opt}
+    if [[ $len -gt 9 ]]; then            # notev 2021-11-12
+      echo ${opt}.txt; echo "=============="
+      $viewer $DN_PATH/$folder/${opt:0:4}/${opt:5:2}/${opt}.txt
+    elif [[ $len -gt 6 ]]; then          # notev 2021-11,   notev 2022-02-2
+      find $DN_PATH/$folder/${opt:0:4}/${opt:5:2}/${opt}* -type f -exec basename {} \;  -exec echo "==============" \; -exec $viewer {} \; -exec echo "" \;       
+    elif [[ $len -gt 3 ]]; then          # notev 2021
+      find $DN_PATH/$folder/${opt:0:4}/ -type f -exec basename {} \; -exec echo "==============" \; -exec $viewer {} \; -exec echo "" \;   
+    fi
 	fi
 }
 
@@ -82,9 +96,9 @@ note() {
     echo "  dnm/notem [note]                     - add a multi-line note for today"    
     echo "  dna/notea [-?d|2019-11-01]           - add a note for a given day"
     echo "  dne/notee <vscode> [ |-?d|-?m|-?y|month|year|all|2019-11-01|2021-11|2021]"
-    echo "            edit note for a given day"
-    echo "  dnv/notev [ |-?d|-?m|month|year|all|2017-01-01|2017-01]2021]"
-    echo "            view notes"
+    echo "                                       - edit note for a given day"
+    echo "  dnv/notev <glow> [ |-?d|-?m|month|year|all|2017-01-01|2017-01]2021]"
+    echo "                                       - view notes"
     echo "  dnq/noteq [query]                    - search in all notes"    
   elif [ "$(echo $@|xargs)" != "" ]; then		
     mfolder=$DN_PATH/notes/$(date "+%Y")/$(date "+%m"); mkdir -p $mfolder
@@ -238,18 +252,13 @@ todoe(){
   vim $DN_PATH/todo.txt
 }
 
-todod(){
-  while IFS= read -r line; do
-    printf "$line \n"
-    # if [[ ${line:0:1} == "*" ]]; then
-    #   printf 'x %s\n' "$line"
-    # else
-    #   printf $line
-  done < $DN_PATH/todo.txt
-}
+# todod(){
+#   while IFS= read -r line; do
+#     printf "$line \n"
+#     # if [[ ${line:0:1} == "*" ]]; then
+#     #   printf 'x %s\n' "$line"
+#     # else
+#     #   printf $line
+#   done < $DN_PATH/todo.txt
+# }
 
-# notes
-#
-# both work
-# [[ "$1" == "" ]]
-# [ "$(echo $@|xargs)" = "" ]
