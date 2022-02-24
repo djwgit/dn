@@ -8,7 +8,7 @@
 _view(){
   clear
   folder=$1; opt=$2; viewer=cat
-  if [[ $2 == *'glow' ]]; then  
+  if [[ $2 == 'glow' ]]; then  
     opt=$3; viewer=glow
   fi  
 
