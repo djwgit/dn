@@ -37,7 +37,7 @@ _view(){
     elif [[ $len -gt 3 ]]; then          # notev 2021
       find $DN_PATH/$folder/${opt:0:4}/ -type f -exec basename {} \; -exec echo "==============" \; -exec $viewer {} \; -exec echo "" \;   
     fi
-	fi
+  fi
 }
 
 # edit note/task different ways
